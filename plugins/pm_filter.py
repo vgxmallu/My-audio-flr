@@ -82,7 +82,7 @@ async def next_page(bot, query):
             btn = [
                 [
                     InlineKeyboardButton(
-                        text=f"📂[{get_size(file.file_size)}] ➵ {file.file_name}", callback_data=f'files#{file.file_id}'
+                        text=f"🎵{file.file_name}", callback_data=f'files#{file.file_id}'
                     ),
                 ]
                 for file in files
@@ -110,7 +110,7 @@ async def next_page(bot, query):
     if n_offset == 0:
         btn.append(
             [
-                InlineKeyboardButton("◀️ BACK", callback_data=f"next_{req}_{key}_{off_set}"),
+                InlineKeyboardButton("<×···", callback_data=f"next_{req}_{key}_{off_set}"),
                 InlineKeyboardButton(f"📃 {math.ceil(int(offset) / 10) + 1} / {math.ceil(total / 10)}", callback_data="pages")
             ]
         )
@@ -118,15 +118,15 @@ async def next_page(bot, query):
         btn.append(
             [
                 InlineKeyboardButton(f"📃 {math.ceil(int(offset) / 10) + 1} / {math.ceil(total / 10)}", callback_data="pages"),
-                InlineKeyboardButton("NEXT ▶️", callback_data=f"next_{req}_{key}_{n_offset}")
+                InlineKeyboardButton("···×>", callback_data=f"next_{req}_{key}_{n_offset}")
             ]
         )
     else:
         btn.append(
             [
-                InlineKeyboardButton("◀️ BACK", callback_data=f"next_{req}_{key}_{off_set}"),
+                InlineKeyboardButton("<×···", callback_data=f"next_{req}_{key}_{off_set}"),
                 InlineKeyboardButton(f"📃 {math.ceil(int(offset) / 10) + 1} / {math.ceil(total / 10)}", callback_data="pages"),
-                InlineKeyboardButton("NEXT ▶️", callback_data=f"next_{req}_{key}_{n_offset}")
+                InlineKeyboardButton("···×>", callback_data=f"next_{req}_{key}_{n_offset}")
             ]
         )
 
@@ -441,15 +441,14 @@ async def cb_handler(client: Client, query: CallbackQuery):
         
     elif query.data == "start":
         buttons = [[
-            InlineKeyboardButton('ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘs', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
-            ],[
-            InlineKeyboardButton('ʜᴇʟᴘ', callback_data='help'),
-            InlineKeyboardButton('ᴀʙᴏᴜᴛ', callback_data='about')
+            InlineKeyboardButton('♣️Help', callback_data='help'),
+            InlineKeyboardButton('💢About', callback_data='about'),
+            InlineKeyboardButton('📊Status', callback_data='stats')
         ],[
-             InlineKeyboardButton(f'ᴏᴛᴛ ᴜᴘᴅᴀᴛᴇs​', url='https://t.me/new_ott_movies3'),
-             InlineKeyboardButton(f'ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ', url='https://t.me/mn_movies2')
-         ],[
-            InlineKeyboardButton('ʀᴇᴘᴏ', url='https://github.com/mn-bots/ShobanaFilterBot')
+            InlineKeyboardButton(f'📣My Channel​', url='https://t.me/xbots_x'),
+            InlineKeyboardButton(f'🎵Music Group', url='https://t.me/music_X_galaxy')
+        ],[
+            InlineKeyboardButton('➕ Add me to Group!', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
             ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
@@ -689,7 +688,7 @@ async def auto_filter(client, msg, spoll=False):
         cap_lines = []
         for file in files:
             file_link = f"https://t.me/{temp.U_NAME}?start={pre}_{file.file_id}"
-            cap_lines.append(f"📁 {get_size(file.file_size)} - [{file.file_name}]({file_link})")
+            cap_lines.append(f"🎵 [{file.file_name}]({file_link})")
         cap_text = "\n".join(cap_lines)
 
         btn = []
@@ -699,7 +698,7 @@ async def auto_filter(client, msg, spoll=False):
             req = message.from_user.id if message.from_user else 0
             btn.append([
                 InlineKeyboardButton(text=f"📃 1/{math.ceil(int(total_results) / 10)}", callback_data="pages"),
-                InlineKeyboardButton(text="NEXT ▶️", callback_data=f"next_{req}_{key}_{offset}")
+                InlineKeyboardButton(text="···×>", callback_data=f"next_{req}_{key}_{offset}")
             ])
         else:
             btn.append([InlineKeyboardButton(text="📃 1/1", callback_data="pages")])
@@ -708,7 +707,7 @@ async def auto_filter(client, msg, spoll=False):
             btn = [
                 [
                     InlineKeyboardButton(
-                        text=f"📂[{get_size(file.file_size)}]--{file.file_name}", callback_data=f'{pre}#{file.file_id}'
+                        text=f"🎵{file.file_name}", callback_data=f'{pre}#{file.file_id}'
                     ),
                 ]
                 for file in files
@@ -733,7 +732,7 @@ async def auto_filter(client, msg, spoll=False):
             req = message.from_user.id if message.from_user else 0
             btn.append([
                 InlineKeyboardButton(text=f"📃 1/{math.ceil(int(total_results) / 10)}", callback_data="pages"),
-                InlineKeyboardButton(text="NEXT ▶️", callback_data=f"next_{req}_{key}_{offset}")
+                InlineKeyboardButton(text="···×>", callback_data=f"next_{req}_{key}_{offset}")
             ])
         else:
             btn.append([InlineKeyboardButton(text="📃 1/1", callback_data="pages")])
@@ -797,7 +796,7 @@ async def auto_filter(client, msg, spoll=False):
             await delau.delete()
         except Exception as e:
             logger.exception(e)
-            audel = await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
+            audel = await message.reply_photo(photo="https://files.catbox.moe/lld5af.jpg", caption=cap, reply_markup=InlineKeyboardMarkup(btn))
             await asyncio.sleep(300)
             await audel.delete()
     else:
@@ -809,7 +808,7 @@ async def auto_filter(client, msg, spoll=False):
                 disable_web_page_preview=True
             )
         else:
-            autodel = await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
+            autodel = await message.reply_photo(photo="https://files.catbox.moe/lld5af.jpg", caption=cap, reply_markup=InlineKeyboardMarkup(btn))
 
         await asyncio.sleep(300)
         await autodel.delete()
