@@ -1,22 +1,25 @@
 class script(object):
-    START_TXT = """ Hᴇʟʟᴏ {}.
-𝖨𝗆 𝖺𝗇 𝖺𝗎𝗍𝗈 𝖿𝗂𝗅𝗍𝖾𝗋 𝖻𝗈𝗍 𝗐𝗁𝗂𝖼𝗁 𝖼𝖺𝗇 𝗉𝗋𝗈𝗏𝗂𝖽𝖾 𝗆𝗈𝗏𝗂𝖾𝗌 𝗂𝗇 𝗒𝗈𝗎𝗋 𝗀𝗋𝗈𝗎𝗉𝗌.
-+ 𝖠𝖽𝖽 𝖬𝖾 𝖳𝗈 𝖸𝗈𝗎𝗋 𝖦𝗋𝗈𝗎𝗉 + 𝖺𝗇𝖽 𝗉𝗋𝗈𝗆𝗈𝗍𝖾 𝗆𝖾 𝖺𝗌 𝖺𝖽𝗆𝗂𝗇 𝗍𝗈 𝗅𝖾𝗍 𝗆𝖾 𝗀𝖾𝗍 𝗂𝗇 𝖺𝖼𝗍𝗂𝗈𝗇."""
+    START_TXT = """
+<blockquote>Hey, {} how are you:).
+𝖨𝗆 𝖺 music x 𝖿𝗂𝗅𝗍𝖾𝗋 𝖻𝗈𝗍 𝗐𝗁𝗂𝖼𝗁 𝖼𝖺𝗇 𝗉𝗋𝗈𝗏𝗂𝖽𝖾 Musics here or add me to 𝗒𝗈𝗎𝗋 𝗀𝗋𝗈𝗎𝗉 and request there.
+
+<b>Click Help for more information.</b></blockquote>
+"""
     HELP_TXT = """
-     Hey  {} 
-Currently using free server so please Dont kill Me...
+🎵 <b>help for music search:</b>
+Hey  {} , To find music just enter it's name of the song here. or you can request music in also Groups, just add me to your chats too.
 """
     ABOUT_TXT = """<b>
-◎ Cʀᴇᴀᴛᴏʀ: <a href=https://github.com/mntg4u> MN - TG</a>
-◎ Lᴀɴɢᴜᴀɢᴇ: Pʏᴛʜᴏɴ 3
-◎ Dᴀᴛᴀ Bᴀsᴇ: Mᴏɴɢᴏ DB
-◎ Bᴏᴛ Sᴇʀᴠᴇʀ: KoYeb</b>"""
+× **Real Owner of Repo:** <a href=https://github.com/adi-code22>Eva-Maria</a>
+× **Lang:** Python 3
+× **Database**: Mongo DB
+× **Server**: VPS👀</b>"""
     SOURCE_TXT = """<b>NOTE:</b>
-- Shobana Filter Bot  is a open source project. 
-- Source - <ahref=https://github.com/mn-bots/ShobanaFilterBot>Click Here to get source code</a>
+- Music Filter x Bot  is a open source project. 
+- Source - <ahref=https://github.com/adi-code22/EvaMaria>Click Here to get source code</a>
 
 <b>DEVS:</b>
--<a href=https://github.com/mntg4u> MN - TG</a>"""
+-<a href=https://github.com/adi-code22/EvaMaria>Eva</a>"""
     MANUELFILTER_TXT = """Help: <b>Filters</b>
 - Filter is the feature were users can set automated replies for a particular keyword and shobana will respond whenever a keyword is found the message
 <b>NOTE:</b>
@@ -39,21 +42,22 @@ Currently using free server so please Dont kill Me...
 3. Buttons should be properly parsed as markdown format
 
 <b>URL buttons:</b>
-<code>[Button Text](buttonurl:https://github.com/mn-bots/ShobanaFilterBot)</code>
+<code>[Button Text](buttonurl:https://t.me/xbots_x)</code>
 
 <b>Alert buttons:</b>
 <code>[Button Text](buttonalert:This is an alert message)</code>"""
     AUTOFILTER_TXT = """
+<b>Add MUSIC'S to my DB, and use to your group!</b>
 
-<b>ɴᴏᴛᴇ: Fɪʟᴇ Iɴᴅᴇx</b>
-1. ᴍᴀᴋᴇ ᴍᴇ ᴛʜᴇ ᴀᴅᴍɪɴ ᴏꜰ ʏᴏᴜʀ ᴄʜᴀɴɴᴇʟ ɪꜰ ɪᴛ'ꜱ ᴘʀɪᴠᴀᴛᴇ.
-2. ᴍᴀᴋᴇ ꜱᴜʀᴇ ᴛʜᴀᴛ ʏᴏᴜʀ ᴄʜᴀɴɴᴇʟ ᴅᴏᴇꜱ ɴᴏᴛ ᴄᴏɴᴛᴀɪɴꜱ ᴄᴀᴍʀɪᴘꜱ, ᴘᴏʀɴ ᴀɴᴅ ꜰᴀᴋᴇ ꜰɪʟᴇꜱ.
-3. ꜰᴏʀᴡᴀʀᴅ ᴛʜᴇ ʟᴀꜱᴛ ᴍᴇꜱꜱᴀɢᴇ ᴛᴏ ᴍᴇ ᴡɪᴛʜ Qᴜᴏᴛᴇꜱ. ɪ'ʟʟ ᴀᴅᴅ ᴀʟʟ ᴛʜᴇ ꜰɪʟᴇꜱ ɪɴ ᴛʜᴀᴛ ᴄʜᴀɴɴᴇʟ ᴛᴏ ᴍʏ ᴅʙ.
+× Add me to your music requesting group.
+×✅ Make me admin in your Group ✖️🎵.
+× and request Music's there.
 
-<b>Nᴏᴛᴇ: AᴜᴛᴏFɪʟᴛᴇʀ</b>
-1. Aᴅᴅ ᴛʜᴇ ʙᴏᴛ ᴀs ᴀᴅᴍɪɴ ᴏɴ ʏᴏᴜʀ ɢʀᴏᴜᴘ.
-2. Usᴇ /connect ᴀɴᴅ ᴄᴏɴɴᴇᴄᴛ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴛᴏ ᴛʜᴇ ʙᴏᴛ.
-3. Usᴇ /settings ᴏɴ ʙᴏᴛ's PM ᴀɴᴅ ᴛᴜʀɴ ᴏɴ AᴜᴛᴏFɪʟᴛᴇʀ ᴏɴ ᴛʜᴇ sᴇᴛᴛɪɴɢs ᴍᴇɴᴜ.."""
+×+ If you want to add your musics files to my Database, just forward last message from your music DB channel, or copy the last message link from your music database channel and paste here.
+×÷ and don't forward movie files. Audios file's only
+
+/buggs to report my owner.
+"""
     CONNECTION_TXT = """Help: <b>Connections</b>
 
 - Used to connect bot to PM for managing filters 
@@ -90,34 +94,49 @@ these are the extra features of ShobanaFilterBot
 This module only works for my admins
 
 <b>Commands and Usage:</b>
-• /logs - <code>to get the rescent errors</code>
-• /stats - <code>to get status of files in db.</code>
-• /delete - <code>to delete a specific file from db.</code>
-• /users - <code>to get list of my users and ids.</code>
-• /chats - <code>to get list of the my chats and ids </code>
-• /leave  - <code>to leave from a chat.</code>
-• /disable  -  <code>do disable a chat.</code>
-• /ban  - <code>to ban a user.</code>
-• /unban  - <code>to unban a user.</code>
-• /channel - <code>to get list of total connected channels</code>
-• /broadcast - <code>to broadcast a message to all users</code>"""
-    STATUS_TXT = """★ 𝚃𝙾𝚃𝙰𝙻 𝙵𝙸𝙻𝙴𝚂: <code>{}</code>
- 𝚃𝙾𝚃𝙰𝙻 𝚄𝚂𝙴𝚁𝚂: <code>{}</code>
- 𝚃𝙾𝚃𝙰𝙻 𝙲𝙷𝙰𝚃𝚂: <code>{}</code>
- 𝚄𝚂𝙴𝙳 𝚂𝚃𝙾𝚁𝙰𝙶𝙴: <code>{}</code> 
- 𝙵𝚁𝙴𝙴 𝚂𝚃𝙾𝚁𝙰𝙶𝙴: <code>{}</code> """
+/logs - <code>to get the rescent errors</code>
+/stats - <code>to get status of files in db.</code>
+/delete - <code>to delete a specific file from db.</code>
+/users - <code>to get list of my users and ids.</code>
+/chats - <code>to get list of the my chats and ids </code>
+/leave  - <code>to leave from a chat.</code>
+/disable  -  <code>do disable a chat.</code>
+/ban  - <code>to ban a user.</code>
+/unban  - <code>to unban a user.</code>
+/channel - <code>to get list of total connected channels</code>
+/broadcast - <code>to broadcast a message to all users</code>
+/ping - <code>check ping.</code>
+/usage - <code>usage of bot.</code>
+/delete| /deleteall - delete files 
+/set_template
+/setskip
+"""
+
+    
+    STATUS_TXT = """
+ Files: <code>{}</code>
+ Users: <code>{}</code>
+ Chats: <code>{}</code>
+ 
+ Used Storage: <code>{}</code> 
+ Free Storage: <code>{}</code>
+ """
+    
     LOG_TEXT_G = """#NewGroup
 Group = {}(<code>{}</code>)
 Total Members = <code>{}</code>
 Added By - {}
 """
-    RESULT_TXT="""<blockquote> Hey,     </blockquote>
-<blockquote>Jᴜsᴛ Sᴇᴇ Wʜᴀᴛ I Found Fᴏʀ Yᴏᴜʀ Qᴜᴇʀʏ </blockquote>"""
+    RESULT_TXT="""
+<blockquote>Here is your results {}🎧.</blockquote>"""
 
-    CUSTOM_FILE_CAPTION = """<pre>📂Fɪʟᴇɴᴀᴍᴇ : {file_name}
-FɪʟᴇSɪᴢᴇ : {file_size}
-</pre>"""
+    CUSTOM_FILE_CAPTION = """
+<blockquote>🎧 {file_name} | {file_size}</blockquote>
 
+**©️: @XBOTS_X
+📥: @MusicFilterX_Bot**
+"""
+#</pre>
     
     RESTART_GC_TXT = """
 <b>𝖡𝗈𝗍 𝖱𝖾𝗌𝗍𝖺𝗋𝗍𝖾𝖽 !</b>
@@ -131,46 +150,30 @@ FɪʟᴇSɪᴢᴇ : {file_size}
 ID - <code>{}</code>
 Name - {}
 """
-    SPOLL_NOT_FND="""
+    SPOLL_NOT_FND="""<blockquote> Hi Sir</blockquote>
 I couldn't find anything related to your request. 
-Try reading the instruction below 
-<blockquote>
-1️ Ask in Correct Spelling
-2️ Don't ask Movies which are not Realased on OTT PLATFORMS
-3️ Possible  ASK [movie name langauge] like this or [movie year] </blockquote>
-OR
-<b> Tʜɪs Mᴏᴠɪᴇ Is Nᴏᴛ Aᴅᴅᴇᴅ Tᴏ DB</b>
-<pre>Report To ADMIN BY USING /bugs command </pre> 
+Try reading the instruction below 👇🏼
     """
 #SPELL CHECK LANGUAGES TO KNOW callback
     ENG_SPELL="""Please Note Below📓
-1️⃣ Ask in Correct Spelling
-2️⃣ Don't ask Movies which are not Realased on OTT PLATFORMS
-3️⃣ Possible  ASK [movie name langauge] like this or [movie year]
+    Ask in Correct Spelling
     """
-    MAL_SPELL="""ദയവായി താഴെ ശ്രദ്ധിക്കുക📓
-1️⃣ ശരിയായ അക്ഷരവിന്യാസത്തിൽ ചോദിക്കുക
-2️⃣ OTT പ്ലാറ്റ്‌ഫോമുകളിൽ റിലീസ് ചെയ്യാത്ത സിനിമകൾ ചോദിക്കരുത്
-3️⃣ ഇത് പോലെ [സിനിമയുടെ പേര് ഭാഷ] അല്ലെങ്കിൽ [സിനിമ വർഷം] ചോദിക്കാം
+    MAL_SPELL="""ദയവായി താഴെ ശ്രദ്ധിക്കുക
+ശരിയായ അക്ഷരവിന്യാസത്തിൽ ചോദിക്കുക
     """
-    HIN_SPELL="""कृपया नीचे ध्यान दें📓
-1️⃣ सही वर्तनी में पूछें
-2️⃣ उन फिल्मों के बारे में न पूछें जो ओटीटी प्लेटफॉर्म पर रिलीज नहीं हुई हैं
-3️⃣ संभव है पूछें [मूवी का नाम भाषा] इस तरह या [मूवी वर्ष]
+    HIN_SPELL="""
+    👀👀👀
     """
-    TAM_SPELL="""கீழே கவனிக்கவும்📓
-1️⃣ சரியான எழுத்துப்பிழையில் கேளுங்கள்
-2️⃣ வெளியாகாத திரைப்படங்களைக் கேட்காதீர்கள்
-3️⃣ இந்த வடிவத்தில் கேளுங்கள் [திரைப்படத்தின் பெயர், ஆண்டு]
+    TAM_SPELL="""
+   👀👀👀
     """
 
-    CHK_MOV_ALRT="""♻️ ᴄʜᴇᴄᴋɪɴɢ ꜰɪʟᴇ ᴏɴ ᴍʏ ᴅᴀᴛᴀʙᴀꜱᴇ... ♻️"""
+    CHK_MOV_ALRT="""♻️ Cheking files on my DB... ♻️"""
     
-    OLD_MES=""" 𝐘𝐨𝐮 𝐚𝐫𝐞 𝐮𝐬𝐢𝐧𝐠 𝐨𝐧𝐞 𝐨𝐟 𝐦𝐲 𝐨𝐥𝐝 𝐦𝐞𝐬𝐬𝐚𝐠𝐞𝐬🤔, 𝐩𝐥𝐞𝐚𝐬𝐞 𝐬𝐞𝐧𝐝 𝐭𝐡𝐞 𝐫𝐞𝐪𝐮𝐞𝐬𝐭 𝐚𝐠𝐚𝐢𝐧"""
+    OLD_MES="""Dont Click Old Message!!!"""
     
-    MOV_NT_FND="""<b>Tʜɪs Mᴏᴠɪᴇ Is Nᴏᴛ Yᴇᴛ Rᴇᴀʟᴇsᴇᴅ Oʀ Aᴅᴅᴇᴅ Tᴏ DB</b>
+    MOV_NT_FND="""
 <pre>Report To ADMIN BY USING /bugs command </pre> 
 """
     RESTART_TXT = """
 <b><u>𝖡𝗈𝗍 𝖱𝖾𝗌𝗍𝖺𝗋𝗍𝖾𝖽 ✅</u></b>"""
-
