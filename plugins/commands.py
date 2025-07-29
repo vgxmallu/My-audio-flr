@@ -175,9 +175,8 @@ async def start(client, message):
     if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
         buttons = [
               [
-                  InlineKeyboardButton(f'ᴏᴛᴛ ᴜᴘᴅᴀᴛᴇs​', url='https://t.me/new_ott_movies3'),
-                  InlineKeyboardButton(f'ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ', url='https://t.me/mn_movies2'),
-                  InlineKeyboardButton('ʀᴇᴘᴏ', url='https://github.com/mn-bots/ShobanaFilterBot')
+                  InlineKeyboardButton(f'Channel​', url='https://t.me/xbots_x'),
+                  InlineKeyboardButton(f'Group', url='https://t.me/songdownload_group')
          ]
             ]
         reply_markup = InlineKeyboardMarkup(buttons)
@@ -193,18 +192,17 @@ async def start(client, message):
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention))
     if len(message.command) != 2:
         buttons = [[
-            InlineKeyboardButton('ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘs', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
-            ],[
-            InlineKeyboardButton('ʜᴇʟᴘ', callback_data='help'),
-            InlineKeyboardButton('ᴀʙᴏᴜᴛ', callback_data='about')
-        ], [
-             InlineKeyboardButton(f'ᴏᴛᴛ ᴜᴘᴅᴀᴛᴇs​', url='https://t.me/new_ott_movies3'),
-             InlineKeyboardButton(f'ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ', url='https://t.me/mn_movies2')
+            InlineKeyboardButton('♣️Help', callback_data='help'),
+            InlineKeyboardButton('💢About', callback_data='about'),
+            InlineKeyboardButton('📊Status', callback_data='stats')
         ],[
-            InlineKeyboardButton('ʀᴇᴘᴏ', url='https://github.com/mn-bots/ShobanaFilterBot')
+            InlineKeyboardButton(f'📣My Channel​', url='https://t.me/xbots_x'),
+            InlineKeyboardButton(f'🎵Music Group', url='https://t.me/music_X_galaxy')
+        ],[
+            InlineKeyboardButton('➕ Add me to Group!', url=f'http://t.me/{temp.U_NAME}?startgroup=true') 
          ]]
         reply_markup = InlineKeyboardMarkup(buttons)
-        m=await message.reply_text("ShobanaFilterBot") 
+        m=await message.reply_text("**🎵MUSIC IS LIFE🎵**") 
         await asyncio.sleep(1.2)
         await m.delete()
         await message.reply_photo(
@@ -235,15 +233,14 @@ async def start(client, message):
         return
     if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
         buttons = [[
-            InlineKeyboardButton('ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘs', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
-            ],[
-            InlineKeyboardButton('ʜᴇʟᴘ', callback_data='help'),
-            InlineKeyboardButton('ᴀʙᴏᴜᴛ', callback_data='about')
+            InlineKeyboardButton('♣️Help', callback_data='help'),
+            InlineKeyboardButton('💢About', callback_data='about'),
+            InlineKeyboardButton('📊Status', callback_data='stats')
         ],[
-             InlineKeyboardButton(f'ᴏᴛᴛ ᴜᴘᴅᴀᴛᴇs​', url='https://t.me/new_ott_movies3'),
-             InlineKeyboardButton(f'ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ', url='https://t.me/mn_movies2')
+            InlineKeyboardButton(f'📣My Channel​', url='https://t.me/xbots_x'),
+            InlineKeyboardButton(f'🎵Music Group', url='https://t.me/music_X_galaxy')
         ],[
-            InlineKeyboardButton('ʀᴇᴘᴏ', url='https://github.com/mn-bots/ShobanaFilterBot')
+            InlineKeyboardButton('➕ Add me to Group!', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
          ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
