@@ -128,7 +128,7 @@ Total Members = <code>{}</code>
 Added By - {}
 """
     RESULT_TXT="""
-<blockquote>Here is your results {}🎧.</blockquote>"""
+<blockquote>🎵Here is your results🎧.</blockquote>"""
 
     CUSTOM_FILE_CAPTION = """
 <blockquote>🎧 {file_name} | {file_size}</blockquote>
