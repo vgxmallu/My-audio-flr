@@ -485,8 +485,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('Repo', url='https://github.com/adi-code22/EvaMaria')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
-        await query.message.edit_InlineKeyboardButton('<-', callback_data='start'),
-            InlineKeyboardButton('Admins', callback_data='admin')text(
+        await query.message.edit_text(
             text=script.SOURCE_TXT,
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
