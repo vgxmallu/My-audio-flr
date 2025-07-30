@@ -7,13 +7,14 @@ class script(object):
 """
     HELP_TXT = """
 🎵 <b>help for music search:</b>
-Hey  {} , To find music just enter it's name of the song here. or you can request music in also Groups, just add me to your chats too.
+
+Hey  {} , To find music just enter it's name of the song here. or you can add me in your Group and request there.
 """
     ABOUT_TXT = """<b>
-× **Real Owner of Repo:** <a href=https://github.com/adi-code22>Eva-Maria</a>
-× **Lang:** Python 3
-× **Database**: Mongo DB
-× **Server**: VPS👀</b>"""
+× <b>Owner of Repo:</b> <a href=https://github.com/adi-code22>Eva-Maria</a>
+• <b>Language:</b> Python 3
+× <b>Database:</b> Mongo DB
+• <b>Server:</b> VPS👀</b>"""
     SOURCE_TXT = """<b>NOTE:</b>
 - Music Filter x Bot  is a open source project. 
 - Source - <ahref=https://github.com/adi-code22/EvaMaria>Click Here to get source code</a>
