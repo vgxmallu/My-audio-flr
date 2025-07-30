@@ -128,13 +128,12 @@ Total Members = <code>{}</code>
 Added By - {}
 """
     RESULT_TXT="""
-<blockquote>🎵Here is your results🎧.</blockquote>"""
+<pre><blockquote>🎵Here is your results🎧.</blockquote></pre>"""
 
     CUSTOM_FILE_CAPTION = """
-<blockquote>🎧 {file_name} | {file_size}</blockquote>
+<pre><blockquote>🎧 {file_name} | {file_size}</blockquote>
 
-**©️: @XBOTS_X
-📥: @MusicFilterX_Bot**
+©️: @XBOTS_X</pre>
 """
 #</pre>
     
