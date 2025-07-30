@@ -114,26 +114,26 @@ This module only works for my admins
 
     
     STATUS_TXT = """
- Files: <code>{}</code>
- Users: <code>{}</code>
- Chats: <code>{}</code>
+× <b>Files:</b> <code>{}</code>
+• <b>Users:</b> <code>{}</code>
+× <b>Chats:</b> <code>{}</code>
  
- Used Storage: <code>{}</code> 
- Free Storage: <code>{}</code>
+× <b>Used Storage:</b> <code>{}</code> 
+× <b>Free Storage:</b> <code>{}</code>
  """
     
     LOG_TEXT_G = """#NewGroup
-Group = {}(<code>{}</code>)
-Total Members = <code>{}</code>
-Added By - {}
+× <b>Group id:</b> {}(<code>{}</code>)
+• <b>Total Members:</b> <code>{}</code>
+× <b>Added By:</b> {}
 """
     RESULT_TXT="""
-<pre><blockquote>🎵Here is your results🎧.</blockquote></pre>"""
+<pre><blockquote>🎧Here is your results🎧.</blockquote></pre>"""
 
     CUSTOM_FILE_CAPTION = """
-<pre><blockquote>🎧 {file_name} | {file_size}</blockquote>
+<pre><blockquote>🎧 {file_name} | {file_size}</blockquote></pre>
 
-©️: @XBOTS_X</pre>
+<b>©️: @XBOTS_X</b>
 """
 #</pre>
     
@@ -146,10 +146,10 @@ Added By - {}
 🛠️ 𝖡𝗎𝗂𝗅𝖽 𝖲𝗍𝖺𝗍𝗎𝗌 : <code>𝗏1 [ 𝖲𝗍able ]</code></b>"""
     
     LOG_TEXT_P = """#NewUser
-ID - <code>{}</code>
-Name - {}
+UserID: <code>{}</code>
+Name: {}
 """
-    SPOLL_NOT_FND="""<blockquote> Hi Sir</blockquote>
+    SPOLL_NOT_FND="""<blockquote> Hi,</blockquote>
 I couldn't find anything related to your request. 
 Try reading the instruction below 👇🏼
     """
