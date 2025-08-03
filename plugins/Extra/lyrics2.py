@@ -5,7 +5,7 @@ from lyricsgenius import genius
 from pyrogram.errors.exceptions.bad_request_400 import MessageTooLong
 
 
-api = genius.Genius("Vd9FvPMOKWfsKJNG9RbZnItaTNIRFzVyyXFdrGHONVsGqHcHBoj3AI3sIlNuqzuf0ZNG8uLcF9wAd5DXBBnUzA",verbose=False)
+api = genius.Genius("Aiiyg6QbQzs5eBqzXz3jRYcK4aPl5X1reag7WT8b6Rbb61t1cX57aYOTQL7DSdsm2ARnXAiYg_BbR5n1G3Uz4A",verbose=False)
 
 
 @Medusa.on_message(filters.command(['lyr','lyri']) 
