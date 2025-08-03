@@ -40,6 +40,7 @@ from plugins.webcode import bot_run
 PORT_CODE = environ.get("PORT", "8080")
 
 
+formatter = logging.Formatter('%(levelname)s %(asctime)s - %(name)s - %(message)s')
 fh = logging.FileHandler(f'{__name__}.log', 'w')
 fh.setFormatter(formatter)
 fh.setLevel(logging.DEBUG)
