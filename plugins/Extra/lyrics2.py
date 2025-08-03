@@ -10,7 +10,7 @@ api = genius.Genius(GENIUS_API,verbose=False)
 thumbl = "https://telegra.ph/file/867b54d9b47b462d46444.jpg"
 
 @vgx.on_message(filters.command(["lyric"]))
-async def lyricsj1(medusa:Medusa,msg: Message):
+async def lyricsj1(msg: Message):
 
     if len(msg.command) == 1:
         return await msg.reply(
@@ -29,7 +29,7 @@ async def lyricsj1(medusa:Medusa,msg: Message):
     lyrics_text = lyric.lyrics
 
     try:
-        await r_text.edit_text(f'__--**{lyric_title}**--__\n__{lyric_artist}\n__\n\n__{lyrics_text}__\n__Extracted by @GojoSatoru_Xbot__')
+        await r_text.edit_text(f'__--**{lyric_title}**--__\n__{lyric_artist}\n__\n\n__{lyrics_text}__')
 
     except MessageTooLong:
         with open(f'downloads/{lyric_title}.txt','w') as f:
@@ -39,7 +39,7 @@ async def lyricsj1(medusa:Medusa,msg: Message):
         await msg.reply_document(
             document=f'downloads/{lyric_title}.txt',
             thumb=thumbl,
-            caption=f'\n__--{lyric_title}--__\n__{lyric_artist}__\n\n__Extracted by @GojoSatoru_Xbot__'
+            caption=f'\n__--{lyric_title}--__\n__{lyric_artist}__'
         )
 
         await r_text.delete()
