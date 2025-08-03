@@ -57,3 +57,4 @@ ytthumb
 git+https://github.com/agronholm/anyio
 git+https://github.com/Joelkb/cinemagoer
 
+lyricsgenius
