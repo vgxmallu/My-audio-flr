@@ -61,3 +61,4 @@ lyricsgenius
 youtube-search-python
 deezer-python
 spotipy
+telethon~=1.14.0
