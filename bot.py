@@ -28,6 +28,7 @@ from pyrogram import types
 from Script import script
 from os import environ
 from aiohttp import web as webserver
+from telethon import TelegramClient, events, functions, types
 
 # Peer ID invalid fix
 from pyrogram import utils as pyroutils
@@ -37,6 +38,27 @@ pyroutils.MIN_CHANNEL_ID = -100999999999999
 from plugins.webcode import bot_run
 
 PORT_CODE = environ.get("PORT", "8080")
+
+
+fh = logging.FileHandler(f'{__name__}.log', 'w')
+fh.setFormatter(formatter)
+fh.setLevel(logging.DEBUG)
+
+ch = logging.StreamHandler()
+ch.setFormatter(formatter)
+ch.setLevel(logging.INFO)
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+logger.addHandler(fh)
+logger.addHandler(ch)
+
+telethon_logger = logging.getLogger("telethon")
+telethon_logger.setLevel(logging.WARNING)
+telethon_logger.addHandler(ch)
+telethon_logger.addHandler(fh)
+tbot = TelegramClient(__name__, API_ID, API_HASH, base_logger=telethon_logger).start(bot_token=BOT_TOKEN)
+logger.info("TELETHON BOT STARTED...")
 
 
 # ✅ Add this block
