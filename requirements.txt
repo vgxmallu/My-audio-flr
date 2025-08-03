@@ -52,9 +52,12 @@ wheel
 yt-dlp
 youtube-dl
 youtube-search
-youtube-search-python>=1.4.6
+#youtube-search-python>=1.4.6
 ytthumb
 git+https://github.com/agronholm/anyio
 git+https://github.com/Joelkb/cinemagoer
 
 lyricsgenius
+youtube-search-python
+deezer-python
+spotipy
