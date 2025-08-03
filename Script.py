@@ -1,7 +1,7 @@
 class script(object):
     START_TXT = """
-<blockquote>Hey, {} how are you:).
-𝖨𝗆 𝖺 music x 𝖿𝗂𝗅𝗍𝖾𝗋 𝖻𝗈𝗍 𝗐𝗁𝗂𝖼𝗁 𝖼𝖺𝗇 𝗉𝗋𝗈𝗏𝗂𝖽𝖾 Musics here or add me to 𝗒𝗈𝗎𝗋 𝗀𝗋𝗈𝗎𝗉 and request there.
+<pre>Hey, {} how are you:).
+𝖨𝗆 𝖺 music x 𝖿𝗂𝗅𝗍𝖾𝗋 𝖻𝗈𝗍 𝗐𝗁𝗂𝖼𝗁 𝖼𝖺𝗇 𝗉𝗋𝗈𝗏𝗂𝖽𝖾 Musics here or add me to 𝗒𝗈𝗎𝗋 𝗀𝗋𝗈𝗎𝗉 and request there.</pre>
 
 <b>Click Help for more information.</b></blockquote>
 """
@@ -115,12 +115,15 @@ This module only works for my admins
 
     
     STATUS_TXT = """
-× <b>Files:</b> <code>{}</code>
-• <b>Users:</b> <code>{}</code>
+<b>My Status:</b>
+    
+× <b>We are here saved <code>{}</code> audio files.</b>
+
+<pre>× <b>Users:</b> <code>{}</code>
 × <b>Chats:</b> <code>{}</code>
  
 × <b>Used Storage:</b> <code>{}</code> 
-× <b>Free Storage:</b> <code>{}</code>
+× <b>Free Storage:</b> <code>{}</code></pre>
  """
     
     LOG_TEXT_G = """#NewGroup
@@ -129,7 +132,7 @@ This module only works for my admins
 × <b>Added By:</b> {}
 """
     RESULT_TXT="""
-<pre><blockquote>🎧Here is your results🎧.</blockquote></pre>"""
+<pre><blockquote>🎧Here is your results.</blockquote></pre>"""
 
     CUSTOM_FILE_CAPTION = """
 <pre><blockquote>🎧 {file_name} | {file_size}</blockquote></pre>
