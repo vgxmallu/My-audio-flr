@@ -37,7 +37,7 @@ def scrape_lyrics(url):
     if resp.status_code != 200:
         return "Could not fetch lyrics from Genius."
     soup = BeautifulSoup(resp.text, "html.parser")
-    lyrics_divs = soup.find_all("div", {"data-lyrics-container": "true"})
+    lyrics_divs = soup.find_all("div", {"data-lyrics-container": "true"})t
     lyrics = "\n".join(div.get_text(separator="\n") for div in lyrics_divs)
     if not lyrics:
         match = re.search(r'<div\s+data-lyrics-container="true".*?>(.*?)</div>', resp.text, re.DOTALL)
@@ -46,8 +46,8 @@ def scrape_lyrics(url):
     return lyrics.strip() if lyrics else "Lyrics not found on Genius."
 
 
-@app.on_message(filters.command("lyrics"))
-async def lyrics_command(_, message):
+@app.on_message(filters.command("lyrica"))
+async def lyrics_commandg(_, message):
     if len(message.command) < 2:
         await message.reply("Usage: `/lyrics <song name or artist - title>`\nExample: `/lyrics Alan Walker Alone`")
         return
