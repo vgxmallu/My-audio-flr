@@ -1,4 +1,4 @@
-from pyrogram import Client as Mbot, errors
+from pyrogram import Client, errors
 from youtubesearchpython import SearchVideos
 from pyrogram.types import (
     InlineQuery,
@@ -8,7 +8,7 @@ from pyrogram.types import (
     InlineKeyboardMarkup,
 )
 #from config import SPOTIPY_CLIENT_SECRET, SPOTIPY_CLIENT_ID
-#from mbot import Mbot
+from bot import Bot as Mbot
 from spotipy.oauth2 import SpotifyClientCredentials
 import os
 import spotipy
