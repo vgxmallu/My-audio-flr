@@ -22,7 +22,7 @@ ML = """
 async def lrseharch(bot, message: Message):  
     m = await message.reply_text("Finding your Lyrics🎼...")
     query = message.text.split(None, 1)[1]
-    x = "Vd9FvPMOKWfsKJNG9RbZnItaTNIRFzVyyXFdrGHONVsGqHcHBoj3AI3sIlNuqzuf0ZNG8uLcF9wAd5DXBBnUzA"
+    x = "Aiiyg6QbQzs5eBqzXz3jRYcK4aPl5X1reag7WT8b6Rbb61t1cX57aYOTQL7DSdsm2ARnXAiYg_BbR5n1G3Uz4A"
     y = lyricsgenius.Genius(x)
     y.verbose = False
     S = y.search_song(query, get_full_info=False)
