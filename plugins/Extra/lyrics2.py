@@ -9,7 +9,7 @@ api = genius.Genius(GENIUS_API,verbose=False)
 
 thumbl = "https://telegra.ph/file/867b54d9b47b462d46444.jpg"
 
-@vgx.on_message(filters.command(["", "lyric"]))
+@vgx.on_message(filters.command(["lyric"]))
 async def lyricsj1(medusa:Medusa,msg: Message):
 
     if len(msg.command) == 1:
