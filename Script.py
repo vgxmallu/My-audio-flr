@@ -8,7 +8,9 @@ class script(object):
     HELP_TXT = """
 🎵 <b>help for music search:</b>
 
-Hey  {} , To find music just enter it's name of the song here. or you can add me in your Group and request there.
+<pre>Hey  {} , To find music just enter it's name of the song here. or you can add me in your Group and request there.</pre>
+
+/feedback to send your reports.
 """
     ABOUT_TXT = """<b>
 × <b>Owner of Repo:</b> <a href=https://github.com/adi-code22>Eva-Maria</a>
