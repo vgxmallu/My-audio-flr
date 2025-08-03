@@ -18,7 +18,7 @@ ML = """
 ♐**ID** : `{}`
 """
 
-@Client.on_message(filters.command("lyrics"))
+@Client.on_message(filters.command("lyr"))
 async def lrsearch(bot, message: Message):  
     m = await message.reply_text("Finding your Lyrics🎼...")
     query = message.text.split(None, 1)[1]
