@@ -8,7 +8,7 @@ from pyrogram.types import (
     InlineKeyboardMarkup,
 )
 #from config import SPOTIPY_CLIENT_SECRET, SPOTIPY_CLIENT_ID
-from bot import Bot as Mbot
+from bot import Bot 
 from spotipy.oauth2 import SpotifyClientCredentials
 import os
 import spotipy
@@ -86,7 +86,7 @@ buttons_yt = [
 ]
 
 
-@Mbot.on_inline_query()
+@Bot.on_inline_query()
 async def inline_spotify(client: Client, query: InlineQuery):
     string_given = query.query.strip()
     iq = string_given.lower()
