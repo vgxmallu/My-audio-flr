@@ -1,0 +1,533 @@
+import os
+import sqlite3
+import random
+import time
+from datetime import datetime, timedelta
+from pyrogram import Client, filters
+from pyrogram.types import (
+    Message,
+    InlineKeyboardMarkup,
+    InlineKeyboardButton,
+    CallbackQuery
+)
+
+# Initialize bot
+
+
+# Configuration
+ADMIN_IDS = [12345678]  # Replace with your admin ID
+DAILY_BONUS_RANGE = (10, 50)
+VIP_MULTIPLIER = 2
+ACHIEVEMENTS = {
+    "first_message": {"points": 50, "name": "Chatter Starter"},
+    "streak_7": {"points": 100, "name": "Weekly Streak"},
+    "top_3": {"points": 200, "name": "Elite Performer"},
+    "vip": {"points": 500, "name": "VIP Member"}
+}
+
+# Database setup
+DB_NAME = "advanced_ranking.db"
+
+def init_db():
+    conn = sqlite3.connect(DB_NAME)
+    c = conn.cursor()
+    
+    # Users table
+    c.execute('''CREATE TABLE IF NOT EXISTS users (
+                 user_id INTEGER PRIMARY KEY,
+                 username TEXT,
+                 first_name TEXT,
+                 points INTEGER DEFAULT 0,
+                 last_daily_bonus TEXT,
+                 streak INTEGER DEFAULT 0,
+                 is_vip INTEGER DEFAULT 0)''')
+    
+    # Achievements table
+    c.execute('''CREATE TABLE IF NOT EXISTS achievements (
+                 achievement_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                 user_id INTEGER,
+                 achievement_name TEXT,
+                 achieved_at TEXT,
+                 FOREIGN KEY(user_id) REFERENCES users(user_id))''')
+    
+    # Transactions table
+    c.execute('''CREATE TABLE IF NOT EXISTS transactions (
+                 transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                 user_id INTEGER,
+                 points INTEGER,
+                 type TEXT,
+                 timestamp TEXT,
+                 FOREIGN KEY(user_id) REFERENCES users(user_id))''')
+    
+    # Weekly leaderboard cache
+    c.execute('''CREATE TABLE IF NOT EXISTS leaderboard_cache (
+                 cache_id INTEGER PRIMARY KEY,
+                 leaderboard_data TEXT,
+                 expires_at TEXT)''')
+    
+    conn.commit()
+    conn.close()
+
+def get_user(user_id: int):
+    conn = sqlite3.connect(DB_NAME)
+    c = conn.cursor()
+    c.execute("SELECT * FROM users WHERE user_id = ?", (user_id,))
+    user = c.fetchone()
+    conn.close()
+    return user
+
+def update_user(user_id: int, username: str, first_name: str, points: int = 0, 
+               streak: int = None, is_vip: bool = None, bonus_claimed: bool = False):
+    conn = sqlite3.connect(DB_NAME)
+    c = conn.cursor()
+    
+    # Insert or update user
+    c.execute('''INSERT OR IGNORE INTO users (user_id) VALUES (?)''', (user_id,))
+    
+    update_query = '''UPDATE users SET 
+                      username = ?,
+                      first_name = ?,
+                      points = points + ?'''
+    params = [username, first_name, points]
+    
+    if streak is not None:
+        update_query += ', streak = ?'
+        params.append(streak)
+    
+    if is_vip is not None:
+        update_query += ', is_vip = ?'
+        params.append(int(is_vip))
+    
+    if bonus_claimed:
+        update_query += ', last_daily_bonus = ?'
+        params.append(datetime.now().isoformat())
+    
+    update_query += ' WHERE user_id = ?'
+    params.append(user_id)
+    
+    c.execute(update_query, tuple(params))
+    
+    # Log transaction if points changed
+    if points != 0:
+        transaction_type = "bonus" if bonus_claimed else "activity"
+        c.execute('''INSERT INTO transactions 
+                     (user_id, points, type, timestamp)
+                     VALUES (?, ?, ?, ?)''',
+                  (user_id, points, transaction_type, datetime.now().isoformat()))
+    
+    conn.commit()
+    conn.close()
+
+def get_leaderboard(limit: int = 10, period: str = "all_time"):
+    conn = sqlite3.connect(DB_NAME)
+    c = conn.cursor()
+    
+    if period == "weekly":
+        # Use cached weekly leaderboard if available
+        c.execute("SELECT leaderboard_data FROM leaderboard_cache WHERE cache_id = 1")
+        cache = c.fetchone()
+        
+        if cache and datetime.fromisoformat(c.execute(
+            "SELECT expires_at FROM leaderboard_cache WHERE cache_id = 1"
+        ).fetchone()[0]) > datetime.now():
+            conn.close()
+            return eval(cache[0])  # Safe for trusted data
+        
+        # Generate fresh weekly leaderboard
+        weekly_cutoff = (datetime.now() - timedelta(days=7)).isoformat()
+        c.execute('''SELECT u.user_id, u.username, u.first_name, 
+                     SUM(t.points) as weekly_points
+                     FROM users u
+                     JOIN transactions t ON u.user_id = t.user_id
+                     WHERE t.timestamp > ?
+                     GROUP BY u.user_id
+                     ORDER BY weekly_points DESC
+                     LIMIT ?''', (weekly_cutoff, limit))
+        leaderboard = c.fetchall()
+        
+        # Cache for 1 hour
+        expires = (datetime.now() + timedelta(hours=1)).isoformat()
+        c.execute('''INSERT OR REPLACE INTO leaderboard_cache 
+                     (cache_id, leaderboard_data, expires_at)
+                     VALUES (?, ?, ?)''',
+                  (1, str(leaderboard), expires))
+        conn.commit()
+    else:
+        # All-time leaderboard
+        c.execute("SELECT * FROM users ORDER BY points DESC LIMIT ?", (limit,))
+        leaderboard = c.fetchall()
+    
+    conn.close()
+    return leaderboard
+
+def get_rank(user_id: int):
+    conn = sqlite3.connect(DB_NAME)
+    c = conn.cursor()
+    c.execute('''SELECT COUNT(*) FROM users 
+                 WHERE points > (SELECT points FROM users WHERE user_id = ?)''', 
+              (user_id,))
+    rank = c.fetchone()[0] + 1
+    conn.close()
+    return rank
+
+def check_achievements(user_id: int):
+    conn = sqlite3.connect(DB_NAME)
+    c = conn.cursor()
+    
+    # Get user info
+    c.execute("SELECT * FROM users WHERE user_id = ?", (user_id,))
+    user = c.fetchone()
+    
+    # Check for achievements
+    new_achievements = []
+    
+    # First message achievement
+    c.execute("SELECT COUNT(*) FROM transactions WHERE user_id = ?", (user_id,))
+    if c.fetchone()[0] == 1:
+        achievement = "first_message"
+        c.execute("SELECT 1 FROM achievements WHERE user_id = ? AND achievement_name = ?",
+                  (user_id, achievement))
+        if not c.fetchone():
+            new_achievements.append(achievement)
+            c.execute('''INSERT INTO achievements 
+                         (user_id, achievement_name, achieved_at)
+                         VALUES (?, ?, ?)''',
+                      (user_id, achievement, datetime.now().isoformat()))
+            update_user(user_id, "", "", ACHIEVEMENTS[achievement]["points"])
+    
+    # Weekly streak achievement
+    if user and user[5] >= 7:  # streak >= 7 days
+        achievement = "streak_7"
+        c.execute("SELECT 1 FROM achievements WHERE user_id = ? AND achievement_name = ?",
+                  (user_id, achievement))
+        if not c.fetchone():
+            new_achievements.append(achievement)
+            c.execute('''INSERT INTO achievements 
+                         (user_id, achievement_name, achieved_at)
+                         VALUES (?, ?, ?)''',
+                      (user_id, achievement, datetime.now().isoformat()))
+            update_user(user_id, "", "", ACHIEVEMENTS[achievement]["points"])
+    
+    conn.commit()
+    conn.close()
+    return new_achievements
+
+# ======================
+# COMMAND HANDLERS
+# ======================
+
+@app.on_message(filters.command("start"))
+def start_cmd(client: Client, message: Message):
+    user = message.from_user
+    update_user(user.id, user.username, user.first_name)
+    
+    keyboard = InlineKeyboardMarkup([
+        [InlineKeyboardButton("🏆 Leaderboard", callback_data="leaderboard")],
+        [InlineKeyboardButton("🎯 My Stats", callback_data="mystats")],
+        [InlineKeyboardButton("🎁 Daily Bonus", callback_data="dailybonus")]
+    ])
+    
+    message.reply_text(
+        "🌟 **Advanced Ranking Bot** 🌟\n\n"
+        "Earn points, climb the leaderboard, and unlock achievements!\n\n"
+        "**Main Features:**\n"
+        "- Daily bonus rewards 🎁\n"
+        "- VIP status with point multiplier 👑\n"
+        "- Weekly leaderboards 📊\n"
+        "- Achievement system 🏅\n"
+        "- Point transactions history 💰",
+        reply_markup=keyboard
+    )
+
+@app.on_message(filters.command("daily"))
+def daily_cmd(client: Client, message: Message):
+    user = message.from_user
+    db_user = get_user(user.id)
+    
+    if not db_user:
+        update_user(user.id, user.username, user.first_name)
+        db_user = get_user(user.id)
+    
+    last_bonus = datetime.fromisoformat(db_user[4]) if db_user[4] else None
+    now = datetime.now()
+    
+    if last_bonus and (now - last_bonus).days < 1:
+        next_bonus = last_bonus + timedelta(days=1)
+        wait_time = next_bonus - now
+        hours, remainder = divmod(wait_time.seconds, 3600)
+        minutes = remainder // 60
+        message.reply_text(
+            f"⏳ You already claimed your daily bonus today!\n"
+            f"Next bonus available in: {hours}h {minutes}m"
+        )
+        return
+    
+    bonus = random.randint(*DAILY_BONUS_RANGE)
+    multiplier = VIP_MULTIPLIER if db_user[6] else 1
+    total_bonus = bonus * multiplier
+    
+    # Calculate streak
+    if last_bonus and (now - last_bonus).days == 1:
+        streak = db_user[5] + 1
+    else:
+        streak = 1
+    
+    update_user(
+        user_id=user.id,
+        username=user.username,
+        first_name=user.first_name,
+        points=total_bonus,
+        streak=streak,
+        bonus_claimed=True
+    )
+    
+    # Check for new achievements
+    new_achievements = check_achievements(user.id)
+    
+    # Build response
+    response = (
+        f"🎉 **Daily Bonus Claimed!** 🎉\n\n"
+        f"• Base Bonus: {bonus} points\n"
+        f"• Streak: {streak} days\n"
+        f"• VIP Multiplier: {multiplier}x\n"
+        f"• Total Received: **{total_bonus} points**\n\n"
+    )
+    
+    if new_achievements:
+        response += "🏆 **New Achievements Unlocked!** 🏆\n"
+        for ach in new_achievements:
+            response += f"  - {ACHIEVEMENTS[ach]['name']}\n"
+    
+    message.reply_text(response)
+
+@app.on_message(filters.command("leaderboard"))
+def leaderboard_cmd(client: Client, message: Message):
+    keyboard = InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("All-Time", callback_data="lb_all"),
+            InlineKeyboardButton("Weekly", callback_data="lb_weekly")
+        ]
+    ])
+    message.reply_text(
+        "📊 **Leaderboard Type**\nSelect which leaderboard to view:",
+        reply_markup=keyboard
+    )
+
+@app.on_message(filters.command("mystats"))
+def mystats_cmd(client: Client, message: Message):
+    user = message.from_user
+    db_user = get_user(user.id)
+    
+    if not db_user:
+        message.reply_text("You're not registered yet! Send any message to join.")
+        return
+    
+    rank = get_rank(user.id)
+    
+    # Get achievements
+    conn = sqlite3.connect(DB_NAME)
+    c = conn.cursor()
+    c.execute("SELECT achievement_name FROM achievements WHERE user_id = ?", (user.id,))
+    achievements = [ACHIEVEMENTS[row[0]]["name"] for row in c.fetchall()]
+    conn.close()
+    
+    response = (
+        f"👤 **Your Stats** 👤\n\n"
+        f"• Rank: #{rank}\n"
+        f"• Points: {db_user[3]}\n"
+        f"• Daily Streak: {db_user[5]} days\n"
+        f"• VIP Status: {'✅' if db_user[6] else '❌'}\n\n"
+    )
+    
+    if achievements:
+        response += "🏅 **Achievements** 🏅\n"
+        for ach in achievements:
+            response += f"  - {ach}\n"
+    else:
+        response += "You haven't unlocked any achievements yet!"
+    
+    message.reply_text(response)
+
+@app.on_message(filters.command("makevip") & filters.user(ADMIN_IDS))
+def makevip_cmd(client: Client, message: Message):
+    if not message.reply_to_message:
+        message.reply_text("Reply to a user's message to grant VIP status")
+        return
+    
+    target_user = message.reply_to_message.from_user
+    update_user(
+        user_id=target_user.id,
+        username=target_user.username,
+        first_name=target_user.first_name,
+        is_vip=True
+    )
+    
+    # Grant achievement
+    conn = sqlite3.connect(DB_NAME)
+    c = conn.cursor()
+    achievement = "vip"
+    c.execute('''INSERT INTO achievements 
+                 (user_id, achievement_name, achieved_at)
+                 VALUES (?, ?, ?)''',
+              (target_user.id, achievement, datetime.now().isoformat()))
+    conn.commit()
+    conn.close()
+    
+    message.reply_text(f"👑 VIP status granted to @{target_user.username}!")
+
+# ======================
+# CALLBACK HANDLERS
+# ======================
+
+@app.on_callback_query()
+def callback_handler(client: Client, callback_query: CallbackQuery):
+    data = callback_query.data
+    user_id = callback_query.from_user.id
+    
+    if data == "leaderboard":
+        keyboard = InlineKeyboardMarkup([
+            [
+                InlineKeyboardButton("All-Time", callback_data="lb_all"),
+                InlineKeyboardButton("Weekly", callback_data="lb_weekly")
+            ],
+            [InlineKeyboardButton("« Back", callback_data="main_menu")]
+        ])
+        callback_query.edit_message_text(
+            "📊 **Leaderboard Type**\nSelect which leaderboard to view:",
+            reply_markup=keyboard
+        )
+    
+    elif data.startswith("lb_"):
+        period = "all_time" if data == "lb_all" else "weekly"
+        leaderboard = get_leaderboard(10, period)
+        
+        if not leaderboard:
+            callback_query.answer("Leaderboard is empty!")
+            return
+        
+        period_name = "All-Time" if period == "all_time" else "Weekly"
+        response = f"🏆 **{period_name} Leaderboard** 🏆\n\n"
+        
+        for idx, user in enumerate(leaderboard):
+            points = user[3] if period == "all_time" else user[3]  # Adjust index based on period
+            response += f"{idx+1}. {user[2]} (@{user[1] or '?'}) - {points} pts\n"
+        
+        keyboard = InlineKeyboardMarkup([
+            [InlineKeyboardButton("« Back", callback_data="leaderboard")]
+        ])
+        
+        callback_query.edit_message_text(response, reply_markup=keyboard)
+    
+    elif data == "dailybonus":
+        daily_cmd(client, callback_query.message)
+        callback_query.answer()
+    
+    elif data == "mystats":
+        mystats_cmd(client, callback_query.message)
+        callback_query.answer()
+    
+    elif data == "main_menu":
+        keyboard = InlineKeyboardMarkup([
+            [InlineKeyboardButton("🏆 Leaderboard", callback_data="leaderboard")],
+            [InlineKeyboardButton("🎯 My Stats", callback_data="mystats")],
+            [InlineKeyboardButton("🎁 Daily Bonus", callback_data="dailybonus")]
+        ])
+        callback_query.edit_message_text(
+            "🌟 **Advanced Ranking Bot** 🌟\n\n"
+            "Select an option:",
+            reply_markup=keyboard
+        )
+
+# ======================
+# POINT SYSTEM HANDLERS
+# ======================
+
+@app.on_message(filters.group & ~filters.service)
+def handle_messages(client: Client, message: Message):
+    user = message.from_user
+    if not user:
+        return
+    
+    # Base points
+    points = 1
+    
+    # VIP multiplier
+    db_user = get_user(user.id)
+    if db_user and db_user[6]:  # VIP check
+        points *= VIP_MULTIPLIER
+    
+    # Sticker bonus
+    if message.sticker:
+        points += 2
+    
+    # Voice message bonus
+    if message.voice:
+        points += 3
+    
+    # Update user
+    update_user(
+        user_id=user.id,
+        username=user.username,
+        first_name=user.first_name,
+        points=points
+    )
+    
+    # Check for achievements
+    new_achievements = check_achievements(user.id)
+    
+    # Check for top 3 achievement
+    if new_achievements:
+        rank = get_rank(user.id)
+        if rank <= 3:
+            achievement = "top_3"
+            conn = sqlite3.connect(DB_NAME)
+            c = conn.cursor()
+            c.execute("SELECT 1 FROM achievements WHERE user_id = ? AND achievement_name = ?",
+                      (user.id, achievement))
+            if not c.fetchone():
+                c.execute('''INSERT INTO achievements 
+                             (user_id, achievement_name, achieved_at)
+                             VALUES (?, ?, ?)''',
+                          (user.id, achievement, datetime.now().isoformat()))
+                update_user(user.id, "", "", ACHIEVEMENTS[achievement]["points"])
+            conn.commit()
+            conn.close()
+
+# ======================
+# ADMIN COMMANDS
+# ======================
+
+@app.on_message(filters.command("addpoints") & filters.user(ADMIN_IDS))
+def add_points(client: Client, message: Message):
+    try:
+        points = int(message.command[1])
+    except (IndexError, ValueError):
+        message.reply_text("Usage: /addpoints [amount] (reply to user)")
+        return
+    
+    if not message.reply_to_message:
+        message.reply_text("Reply to a user's message to add points")
+        return
+    
+    target_user = message.reply_to_message.from_user
+    update_user(
+        user_id=target_user.id,
+        username=target_user.username,
+        first_name=target_user.first_name,
+        points=points
+    )
+    
+    message.reply_text(f"✅ Added {points} points to @{target_user.username}!")
+
+@app.on_message(filters.command("resetweekly") & filters.user(ADMIN_IDS))
+def reset_weekly_cache(client: Client, message: Message):
+    conn = sqlite3.connect(DB_NAME)
+    c = conn.cursor()
+    c.execute("DELETE FROM leaderboard_cache WHERE cache_id = 1")
+    conn.commit()
+    conn.close()
+    message.reply_text("✅ Weekly leaderboard cache reset!")
+
+# ======================
+# INITIALIZATION
+# ======================
