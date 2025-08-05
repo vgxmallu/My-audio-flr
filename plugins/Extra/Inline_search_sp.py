@@ -46,9 +46,9 @@ buttons = [
 
 buttons = [
     [
-        InlineKeyboardButton("My Group", url="https://t.me/songdownload_group")
+        InlineKeyboardButton("My Channel", url="https://t.me/xbots_x")
      ],[
-        InlineKeyboardButton("𝗠ᴜsɪᴄ•𝕏•𝗗ʟ", url="t.me/Musicx_dlbot")
+        InlineKeyboardButton("𝗠×F", url="t.me/MusicFilterX_Bot")
     ]
 ]
 
@@ -93,9 +93,9 @@ async def inline_spotify(client: Client, query: InlineQuery):
     if iq == "":
         answer = [
             InlineQueryResultArticle(
-                title="〽️ Music𝕏DlBot ™️",
+                title="〽️ MusicFilter𝕏 Bot ™️",
                 description="💙You can Search, Download and Listening Tracks And Albums From Your Favourite Artists.",
-                thumb_url="https://telegra.ph/file/337cb9b64bb3c7462541e.jpg",
+                thumb_url="https://files.catbox.moe/a7zleq.jpg",
                 input_message_content=InputTextMessageContent(".🎧🎶 Welcome, With This Bot You Can Search, Listen And Download Tens Of Millions Of Tracks And Albums From Your Favourite Artists."),
                 reply_markup=InlineKeyboardMarkup(buttons)
             ),
@@ -107,13 +107,6 @@ async def inline_spotify(client: Client, query: InlineQuery):
                 reply_markup=InlineKeyboardMarkup(buttons_sp)
             ),
             InlineQueryResultArticle(
-                title="🟣Deezer Music",
-                description="Search Tracks, Album, Playlist and Artist from Deezer.",
-                thumb_url="https://telegra.ph/file/03dd6b12cdad0a25c954f.jpg",
-                input_message_content=InputTextMessageContent("Choose:"),
-                reply_markup=InlineKeyboardMarkup(buttons_dz)
-            ),
-            InlineQueryResultArticle(
                 title="🔴YouTube Search",
                 description="Search YouTube videos.",
                 thumb_url="https://telegra.ph/file/d205e71a01426b5d9d4a3.jpg",
@@ -121,7 +114,7 @@ async def inline_spotify(client: Client, query: InlineQuery):
                 reply_markup=InlineKeyboardMarkup(buttons_yt)
             )
         ]
-        await query.answer(results=answer, cache_time=5, switch_pm_text="💫 Welcome To @Musicx_dlbot", switch_pm_parameter="help")
+        await query.answer(results=answer, cache_time=5, switch_pm_text="💫 Welcome To @MusicFilterX_Bot", switch_pm_parameter="help")
     #track     
     elif iq.startswith("st"):
         answers = []
@@ -132,7 +125,7 @@ async def inline_spotify(client: Client, query: InlineQuery):
                     title="♏ Spotify Tracks Search...",
                     description="× Here you can Search Tracks from Spotify.\n× Spotify | @Musicx_dlbot st [song_name]",
                     thumb_url ="https://telegra.ph/file/7715467e3eea07fe2f869.jpg",
-                    input_message_content=InputTextMessageContent("**Search Spotify Tracks** 🎧\ne.g:\nSpotify 🔎 | `@Musicx_dlbot st [song_name]`"),
+                    input_message_content=InputTextMessageContent("**Search Spotify Tracks** 🎧\ne.g:\nSpotify 🔎 | `@MusicFilterX_Bot st [song_name]`"),
                     reply_markup=InlineKeyboardMarkup([
                         [InlineKeyboardButton(
                             text="Search Now🔎",
@@ -151,7 +144,7 @@ async def inline_spotify(client: Client, query: InlineQuery):
             answers.append(
                 InlineQueryResultArticle(                    
                     title=track['name'],
-                    description="Artist: {}\n🔎 By: 𝗠ᴜsɪᴄ•𝕏•𝗗ʟ♪".format(
+                    description="Artist: {}\n🔎 By: @MusicFilterX_Bot".format(
                         track['artists'][0]['name']
                     ),
                     input_message_content=InputTextMessageContent(
@@ -169,9 +162,9 @@ async def inline_spotify(client: Client, query: InlineQuery):
             answers.append(
                 InlineQueryResultArticle(
                     title="♏ Spotify Albums Search...",
-                    description="× Here you can Search Album from Spotify.\n× Spotify | @Musicx_dlbot sa [album_name]",
+                    description="× Here you can Search Album from Spotify.\n× Spotify | @MusicFilterX_Bot sa [album_name]",
                     thumb_url ="https://telegra.ph/file/7715467e3eea07fe2f869.jpg",
-                    input_message_content=InputTextMessageContent("**Search Spotify Album** 💽\ne.g:\nSpotify 🔎 | `@Musicx_dlbot sa [album_name]`"),
+                    input_message_content=InputTextMessageContent("**Search Spotify Album** 💽\ne.g:\nSpotify 🔎 | `@MusicFilterX_Bot sa [album_name]`"),
                     reply_markup=InlineKeyboardMarkup([
                         [InlineKeyboardButton(
                             text="Search Now🔎",
@@ -190,7 +183,7 @@ async def inline_spotify(client: Client, query: InlineQuery):
             answers.append(
                 InlineQueryResultArticle(                    
                     title=album['name'],
-                    description="Artist: {}\nTracks: {}\n🔎 By: 𝗠ᴜsɪᴄ•𝕏•𝗗ʟ♪".format(
+                    description="Artist: {}\nTracks: {}\n🔎 By: @MusicFilterX_Bot".format(
                         album['artists'][0]['name'], album['total_tracks']
                     ),
                     input_message_content=InputTextMessageContent(
@@ -208,9 +201,9 @@ async def inline_spotify(client: Client, query: InlineQuery):
             answers.append(
                 InlineQueryResultArticle(
                     title="♏ Spotify Playlist Search...",
-                    description="× Here you can Search Playlist from Spotify.\n× Spotify | @Musicx_dlbot sp [playlist_name]",
+                    description="× Here you can Search Playlist from Spotify.\n× Spotify | @MusicFilterX_Bot sp [playlist_name]",
                     thumb_url ="https://telegra.ph/file/7715467e3eea07fe2f869.jpg",
-                    input_message_content=InputTextMessageContent("**Search Spotify Playlist** 🗂️\ne.g:\nSpotify 🔎 | `@Musicx_dlbot st [playlist_name]`"),
+                    input_message_content=InputTextMessageContent("**Search Spotify Playlist** 🗂️\ne.g:\nSpotify 🔎 | `@MusicFilterX_Bot st [playlist_name]`"),
                     reply_markup=InlineKeyboardMarkup([
                         [InlineKeyboardButton(
                             text="Search Now🔎",
@@ -229,7 +222,7 @@ async def inline_spotify(client: Client, query: InlineQuery):
             answers.append(
                 InlineQueryResultArticle(                    
                     title=playlist['name'],
-                    description="Owner: {}\nTracks: {}\n🔎 By: 𝗠ᴜsɪᴄ•𝕏•𝗗ʟ♪".format(
+                    description="Owner: {}\nTracks: {}\n🔎 By: @MusicFilterX_Bot".format(
                         playlist['owner']['display_name'], playlist['tracks']['total']
                     ),
                     input_message_content=InputTextMessageContent(
@@ -247,9 +240,9 @@ async def inline_spotify(client: Client, query: InlineQuery):
             answers.append(
                 InlineQueryResultArticle(
                     title="♏ Spotify Artist Search...",
-                    description="× Here you can Search Artist from Spotify.\n× Spotify | @Musicx_dlbot ar [artist_name]",
+                    description="× Here you can Search Artist from Spotify.\n× Spotify | @MusicFilterX_Bot ar [artist_name]",
                     thumb_url ="https://telegra.ph/file/7715467e3eea07fe2f869.jpg",
-                    input_message_content=InputTextMessageContent("**Search Spotify Artist 👤**\ne.g:\nSpotify 🔎 | `@Musicx_dlbot sa [artist_name]`"),
+                    input_message_content=InputTextMessageContent("**Search Spotify Artist 👤**\ne.g:\nSpotify 🔎 | `@MusicFilterX_Bot sa [artist_name]`"),
                     reply_markup=InlineKeyboardMarkup([
                         [InlineKeyboardButton(
                             text="Search Now🔎",
@@ -268,7 +261,7 @@ async def inline_spotify(client: Client, query: InlineQuery):
             answers.append(
                 InlineQueryResultArticle(                    
                     title=artist['name'],
-                    description="Artist: {}\nFollowers: {}\n🔎 By: 𝗠ᴜsɪᴄ•𝕏•𝗗ʟ♪".format(
+                    description="Artist: {}\nFollowers: {}\n🔎 By: @MusicFilterX_Bot".format(
                         artist['name'], artist['followers']['total']
                     ),
                     input_message_content=InputTextMessageContent(
@@ -286,9 +279,9 @@ async def inline_spotify(client: Client, query: InlineQuery):
             result.append(
                 InlineQueryResultArticle(
                     title="♏ YouTube Search",
-                    description="× Here you can Search songs from YouTube.\n× YouTube | @Musicx_dlbot yt [song_name]",
+                    description="× Here you can Search songs from YouTube.\n× YouTube | @MusicFilterX_Bot yt [song_name]",
                     thumb_url ="https://telegra.ph/file/d205e71a01426b5d9d4a3.jpg",
-                    input_message_content=InputTextMessageContent("**Search YouTube Music**\ne.g:\nYouTube 🔎 | `@Musicx_dlbot yt [song_name]`"),
+                    input_message_content=InputTextMessageContent("**Search YouTube Music**\ne.g:\nYouTube 🔎 | `@MusicFilterX_Bot yt [song_name]`"),
                     reply_markup=InlineKeyboardMarkup([
                         [InlineKeyboardButton(
                             text="Search Now🔎",
@@ -315,7 +308,7 @@ async def inline_spotify(client: Client, query: InlineQuery):
             result.append(
                 InlineQueryResultArticle(
                     title=vid_title,
-                    description=f"Channel: {uploader}\nDuration: {time}\n🔎 By: 𝗠ᴜsɪᴄ•𝕏•𝗗ʟ♪",
+                    description=f"Channel: {uploader}\nDuration: {time}\n🔎 By: @MusicFilterX_Bot",
                     input_message_content=InputTextMessageContent(
                         f"{link}" #.format(track['external_urls']['spotify'])
                     ),
