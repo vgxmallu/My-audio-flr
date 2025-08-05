@@ -25,6 +25,24 @@ import random
 
 AUTO_DELETE_SECONDS = 15  
 
+
+sbuttons = [
+    [
+        InlineKeyboardButton("Spotify ⤵️", callback_data="hmm")
+     ],[
+        InlineKeyboardButton("Search Track 🎧", switch_inline_query_current_chat="st "),
+        InlineKeyboardButton("Search Album 💽",  switch_inline_query_current_chat="sa ")
+     ],[
+        InlineKeyboardButton("Search Playlist 🗂️",  switch_inline_query_current_chat="sp "),
+        InlineKeyboardButton("Search Artist 🗣️",  switch_inline_query_current_chat="ar ")
+     ],[
+        InlineKeyboardButton("YouTube ⤵️",  callback_data="hmm")
+     ],[
+        InlineKeyboardButton("YouTube Search 🔎",  switch_inline_query_current_chat="yt ")
+    ]
+]
+
+
 # Helper function to create buttons for specific channel
 async def create_file_buttons(client, sent_message):
     buttons = []
@@ -209,6 +227,11 @@ async def start(client, message):
             photo=random.choice(PICS),
             caption=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
             reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        )
+        await message.reply_text(
+            caption="Search tracks from here:",
+            reply_markup=sbuttons,
             parse_mode=enums.ParseMode.HTML
         )
         return
