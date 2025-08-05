@@ -217,7 +217,7 @@ async def inline_spotify(client: Client, query: InlineQuery):
             return
         results = spotify.search(q=input_query, limit=20, offset=0, type='playlist')
         for playlist in results['playlists']['items']:
-            album_cover = playlist['images'][0]['url']
+            album_cover = playlist['playlist']['images'][0]['url'] #['images'][0]['url']
             urlp = playlist['external_urls']['spotify']
             answers.append(
                 InlineQueryResultArticle(                    
