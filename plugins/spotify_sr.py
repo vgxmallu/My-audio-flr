@@ -36,4 +36,5 @@ async def spotifyvx(bot, message):
                 song.get("cover"),
                 caption=f"🧾Track Details:\n\n🎧 Title: {song['name']}\n👤 Artist: {song['artist']}\n💽 Album: {song['album']}\n📅 Date: {song['year']}\n⛓️‍💥 Link: {link}",
             )
-            return await m.delete()
+            await m.delete()
+            return 
