@@ -13,8 +13,8 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from info import LOG_CHANNEL #LOG_GROUP 
 #from random import choice
 
-client_credentials_manager = SpotifyClientCredentials()
-client = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+#client_credentials_manager = SpotifyClientCredentials()
+#client = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 async def get_data(query):
     ydl_opts = {
