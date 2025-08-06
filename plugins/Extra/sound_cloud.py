@@ -84,7 +84,7 @@ async def slink_handler(bot, message):
        path=await down_data(item,link)
        #await message.reply_chat_action(enums.ChatAction.UPLOAD_AUDIO)
        songcop = await message.reply_audio(path)
-       await message.reply_text("✅ Done.\n[♣️Music🎵Galaxy♣️](https://t.me/songdownload_group) | [𝕏-BOTS-𝕏](https://t.me/xbots_x) | @Musicx_dl2_bot")
+       await message.reply_text("✅ Done.\n[♣️𝑴𝒖𝒔𝒊𝒄-𝕏-𝑮𝒂𝒍𝒂𝒙𝒚♣️](https://t.me/music_X_galaxy) | [𝕏-BOTS-𝕏](https://t.me/xbots_x) | @MusicFilterX_Bot")
        await m.delete()
        #await songcop.react(choice(Telegram.EMOJIS))
        #await message.react(choice(Telegram.EMOJIS))
