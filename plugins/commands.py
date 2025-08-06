@@ -229,7 +229,12 @@ async def start(client, message):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
-        await message.reply_text("Search tracks from here:", reply_markup=sbuttons, parse_mode=enums.ParseMode.HTML)
+        reply_markup1 = InlineKeyboardMarkup(sbuttons)
+        await message.reply_text(
+            "Search tracks from Spotify:", 
+            reply_markup=reply_markup1, 
+            parse_mode=enums.ParseMode.HTML
+        )
         return
     if not await is_subscribed(message.from_user.id, client):
         links = await create_invite_links(client)
