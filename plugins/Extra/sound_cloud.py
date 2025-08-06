@@ -73,7 +73,7 @@ async def slink_handler(bot, message):
     try:
       # if message.from_user.id in temp.BANNED_USERS:
        #   return
-       #await Client.send_message(LOG_CHANNEL, MS.format(message.text, message.from_user.mention, message.from_user.username, message.from_user.dc_id, message.from_user.id))
+       await bot.send_message(LOG_CHANNEL, MS.format(message.text, message.from_user.mention, message.from_user.username, message.from_user.dc_id, message.from_user.id))
        m = await message.reply_text("loading...")
        #await message.reply_chat_action(enums.ChatAction.TYPING)
        link = message.matches[0].group(0)
