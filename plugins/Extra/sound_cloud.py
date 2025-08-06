@@ -11,7 +11,7 @@ import os
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from info import LOG_CHANNEL #LOG_GROUP 
-from random import choice
+#from random import choice
 
 client_credentials_manager = SpotifyClientCredentials()
 client = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
@@ -68,21 +68,21 @@ MS = """
 """
 
 
-@Mbot.on_message(filters.regex(r'https?://.*soundcloud[^\s]+'))
-async def slink_handler(Mbot, message):
+@Client.on_message(filters.regex(r'https?://.*soundcloud[^\s]+'))
+async def slink_handler(bot, message):
     try:
       # if message.from_user.id in temp.BANNED_USERS:
        #   return
-       await Mbot.send_message(LOG_CHANNEL, MS.format(message.text, message.from_user.mention, message.from_user.username, message.from_user.dc_id, message.from_user.id))
-       m = await message.reply_text("Your request is processing...")
-       await message.reply_chat_action(enums.ChatAction.TYPING)
+       #await Client.send_message(LOG_CHANNEL, MS.format(message.text, message.from_user.mention, message.from_user.username, message.from_user.dc_id, message.from_user.id))
+       m = await message.reply_text("loading...")
+       #await message.reply_chat_action(enums.ChatAction.TYPING)
        link = message.matches[0].group(0)
      #  get_s = await db.get_set(message.from_user.id)
     #   if get_s['http'] == "False":
      #     return
        item=await get_data(link)
        path=await down_data(item,link)
-       await message.reply_chat_action(enums.ChatAction.UPLOAD_AUDIO)
+       #await message.reply_chat_action(enums.ChatAction.UPLOAD_AUDIO)
        songcop = await message.reply_audio(path)
        await message.reply_text("✅ Done.\n[♣️Music🎵Galaxy♣️](https://t.me/songdownload_group) | [𝕏-BOTS-𝕏](https://t.me/xbots_x) | @Musicx_dl2_bot")
        await m.delete()
