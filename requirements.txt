@@ -62,3 +62,4 @@ youtube-search-python
 deezer-python
 spotipy
 telethon~=1.40.0
+asgiref
