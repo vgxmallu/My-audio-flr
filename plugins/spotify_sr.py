@@ -8,6 +8,8 @@ from plugins.Extra.mainhlp import (
     parse_spotify_url,
     thumb_down,
 )
+from random import randint
+from os import mkdir
 
 
 SPOTIPY_CLIENT_ID = "9bc099cf511348748c885636a99e8214"
