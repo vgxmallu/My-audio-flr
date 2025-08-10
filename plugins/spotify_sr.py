@@ -37,4 +37,5 @@ async def spotifyvx(bot, message):
                 caption=f"🧾Track Details:\n\n🎧 Title: {song['name']}\n👤 Artist: {song['artist']}\n💽 Album: {song['album']}\n📅 Date: {song['year']}\n⛓️‍💥 Link: {link}",
             )
             await m.delete()
-    finally:
+    except Exception as e:
+    print("An error occurred:", e)
