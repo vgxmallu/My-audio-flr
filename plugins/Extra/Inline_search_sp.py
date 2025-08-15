@@ -123,7 +123,7 @@ async def inline_spotify(client: Client, query: InlineQuery):
             answers.append(
                 InlineQueryResultArticle(
                     title="♏ Spotify Tracks Search...",
-                    description="× Here you can Search Tracks from Spotify.\n× Spotify | @Musicx_dlbot st [song_name]",
+                    description="× Here you can Search Tracks from Spotify.\n× Spotify | @MusicFilterX_Bot st [song_name]",
                     thumb_url ="https://telegra.ph/file/7715467e3eea07fe2f869.jpg",
                     input_message_content=InputTextMessageContent("**Search Spotify Tracks** 🎧\ne.g:\nSpotify 🔎 | `@MusicFilterX_Bot st [song_name]`"),
                     reply_markup=InlineKeyboardMarkup([
@@ -324,9 +324,9 @@ async def inline_spotify(client: Client, query: InlineQuery):
             answers.append(
                 InlineQueryResultArticle(
                     title="♏ Deezer Tracks Search...",
-                    description="× Here you can Search Tracks from Deezer.\n× Deezer | @Musicx_dlbot dt [track_name]",
+                    description="× Here you can Search Tracks from Deezer.\n× Deezer | @MusicFilterX_Bot dt [track_name]",
                     thumb_url ="https://telegra.ph/file/03dd6b12cdad0a25c954f.jpg",
-                    input_message_content=InputTextMessageContent("**Search Deezer Tracks 🎧**\ne.g:\nDeezer 🔎 | `@Musicx_dlbot dt [track_name]`"),
+                    input_message_content=InputTextMessageContent("**Search Deezer Tracks 🎧**\ne.g:\nDeezer 🔎 | `@MusicFilterX_Bot dt [track_name]`"),
                     reply_markup=InlineKeyboardMarkup([
                         [InlineKeyboardButton(
                             text="Search Now🔎",
@@ -345,9 +345,9 @@ async def inline_spotify(client: Client, query: InlineQuery):
             answers.append(
                 InlineQueryResultArticle(
                     title="♏ Deezer Album Search...",
-                    description="× Here you can Search Album from Deezer.\n× Deezer | @Musicx_dlbot da [album_name]",
+                    description="× Here you can Search Album from Deezer.\n× Deezer | @MusicFilterX_Bot da [album_name]",
                     thumb_url ="https://telegra.ph/file/03dd6b12cdad0a25c954f.jpg",
-                    input_message_content=InputTextMessageContent("**Search Deezer Album 💽**\ne.g:\nDeezer 🔎 | `@Musicx_dlbot da [album_name]`"),
+                    input_message_content=InputTextMessageContent("**Search Deezer Album 💽**\ne.g:\nDeezer 🔎 | `@MusicFilterX_Bot da [album_name]`"),
                     reply_markup=InlineKeyboardMarkup([
                         [InlineKeyboardButton(
                             text="Search Now🔎",
@@ -366,9 +366,9 @@ async def inline_spotify(client: Client, query: InlineQuery):
             answers.append(
                 InlineQueryResultArticle(
                     title="♏ Deezer Playlist Search...",
-                    description="× Here you can Search Playlist from Deezer.\n× Deezer | @Musicx_dlbot dp [playlist_name]",
+                    description="× Here you can Search Playlist from Deezer.\n× Deezer | @MusicFilterX_Bot dp [playlist_name]",
                     thumb_url ="https://telegra.ph/file/03dd6b12cdad0a25c954f.jpg",
-                    input_message_content=InputTextMessageContent("**Search Deezer Playlist 🗂️**\ne.g:\nDeezer 🔎 | `@Musicx_dlbot dp [playlist_name]`"),
+                    input_message_content=InputTextMessageContent("**Search Deezer Playlist 🗂️**\ne.g:\nDeezer 🔎 | `@MusicFilterX_Bot dp [playlist_name]`"),
                     reply_markup=InlineKeyboardMarkup([
                         [InlineKeyboardButton(
                             text="Search Now🔎",
@@ -387,9 +387,9 @@ async def inline_spotify(client: Client, query: InlineQuery):
             answers.append(
                 InlineQueryResultArticle(
                     title="♏ Deezer Artist Search...",
-                    description="× Here you can Search Artist from Deezer.\n× Deezer | @Musicx_dlbot dr [artist_name]",
+                    description="× Here you can Search Artist from Deezer.\n× Deezer | @MusicFilterX_Bot dr [artist_name]",
                     thumb_url ="https://telegra.ph/file/03dd6b12cdad0a25c954f.jpg",
-                    input_message_content=InputTextMessageContent("**Search Deezer Artist 👤**\ne.g:\nDeezer 🔎 | `@Musicx_dlbot dr [artist_name]`"),
+                    input_message_content=InputTextMessageContent("**Search Deezer Artist 👤**\ne.g:\nDeezer 🔎 | `@MusicFilterX_Bot dr [artist_name]`"),
                     reply_markup=InlineKeyboardMarkup([
                         [InlineKeyboardButton(
                             text="Search Now🔎",
